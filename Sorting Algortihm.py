@@ -55,7 +55,8 @@ def insertion_sort():
 
 
 def ascend_to_descend():
-    """If array is in ascending order this converts the array to descending order"""
+    """If array is in ascending order this converts
+    the array to descending order"""
 
     for i in range(int(n / 2)):
         h = int(n - i - 1)

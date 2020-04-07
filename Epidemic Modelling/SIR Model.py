@@ -19,7 +19,7 @@ while t+1 < time:
     S[t+1] = S[t] - beta*I[t]*S[t]/N
     I[t+1] = I[t] + beta*I[t]*S[t]/N - gamma*I[t]
     R[t+1] = R[t] + gamma*I[t]
-    #C[t+1]=I[t+1]+R[t+1]
+    # C[t+1]=I[t+1]+R[t+1]
     t += 1
 
 
@@ -28,8 +28,8 @@ plt.grid(True)
 #plt.plot(T, S, color='blue', label="Suspected")
 plt.plot(T, R, color='green', label="Recovered")
 #plt.plot(T, C, color='black', label="Total Cases")
-print("Jumlah Kasus:",I[t]+R[t])
-print("Jumlah Sembuh:",R[t])
-print("Jumlah Terinfeksi:",I[t])
+print("Jumlah Kasus:", I[t]+R[t])
+print("Jumlah Sembuh:", R[t])
+print("Jumlah Terinfeksi:", I[t])
 plt.legend()
 plt.show()
