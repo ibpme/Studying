@@ -18,7 +18,7 @@ y1_change = 0
 
 clock = pygame.time.Clock()
 
-while run == True:
+while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -37,8 +37,8 @@ while run == True:
                 x1_change = 0
     x1 += x1_change
     y1 += y1_change
-    win.fill((0,0,0))
-    pygame.draw.rect(win, (55,55,55), [0, 0, 0, 800],10)
+    win.fill((0, 0, 0))
+    pygame.draw.rect(win, (55, 55, 55), [0, 0, 0, 800], 10)
     pygame.draw.rect(win, (55, 55, 55), [0, 600, 800, 600], 10)
     pygame.draw.rect(win, blue, [x1, y1, 10, 10])
     pygame.display.update()
