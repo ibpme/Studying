@@ -24,6 +24,17 @@ data = [date[1:],total_cases[1:],total_recovered[1:],total_deaths[1:],quarantine
 tests = total_tests[1:]
 time = date[1:len(data[1])+1]
 
+import xlwt
+from xlwt import Workbook
+import os
+
+os.remove("C://Users/ibpra/Documents/COVID 19/INDONESIA MODELING/data_indo.xls")
+wb = Workbook()
+
+sheet1 = wb.add_sheet('Sheet1')
+
 for i in range(1,8):
     for j in range(len(data[i])):
-        data[i][j]=int(data[i][j])
+        sheet1.write(j,i, data[i][j])
+
+wb.save(r'/Users/ibpra/Documents/COVID 19/INDONESIA MODELING/%s.xls' % 'data_indo')
