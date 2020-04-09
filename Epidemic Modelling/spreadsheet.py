@@ -27,13 +27,18 @@ import xlwt
 from xlwt import Workbook
 import os
 
-os.remove("C://Users/ibpra/Documents/COVID 19/INDONESIA MODELING/data_indo.xls")
-wb = Workbook()
+def main():
+    try:
+        os.remove("C://Users/ibpra/Documents/COVID 19/INDONESIA MODELING/data_indo.xls")
+    except OSError:
+            pass
+    wb = Workbook()
+    sheet1 = wb.add_sheet('Sheet1')
 
-sheet1 = wb.add_sheet('Sheet1')
+    for i in range(1,8):
+        for j in range(len(data[i])):
+            sheet1.write(j,i, data[i][j])
+            wb.save(r'/Users/ibpra/Documents/COVID 19/INDONESIA MODELING/%s.xls' % 'data_indo')
 
-for i in range(1,8):
-    for j in range(len(data[i])):
-        sheet1.write(j,i, data[i][j])
-
-wb.save(r'/Users/ibpra/Documents/COVID 19/INDONESIA MODELING/%s.xls' % 'data_indo')
+if __name__=="__main__":
+    main()
