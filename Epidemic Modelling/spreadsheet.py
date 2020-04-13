@@ -23,6 +23,9 @@ data = [date[1:],total_cases[1:],total_recovered[1:],total_deaths[1:],quarantine
 tests = total_tests[1:]
 time = date[1:len(data[1])+1]
 
+for d in range(1,8):
+    data[d]=[int(i) for i in data[d]]
+
 import xlwt
 from xlwt import Workbook
 import os
