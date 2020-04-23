@@ -84,6 +84,27 @@ def quit_game():
     if x == '':
         quit()
 
+def get_letter_condition(i):
+    if player[i].call_amount == 0:
+        letter_condition = input("Check(C)/Raise(R)/Fold(F): ")
+    else:
+        print('Current Raise: ', Player.raise_max)
+        print('To Call: ', player[x].call_amount)
+        letter_condition = input("Call(C)/Raise(R)/Fold(F): ")
+    if letter_condition=='C' or letter_condition=='c' or letter_condition=='call':
+        letter_condition='C'
+    elif letter_condition=='R' or letter_condition=='r' or letter_condition=='raise':
+        letter_condition='R'
+    elif letter_condition=='F' or letter_condition=='f' or letter_condition=='fold':
+        letter_condition='F'
+    elif letter_condition=='SPLIT' or letter_condition=='split':
+        letter_condition='SPLIT'
+    elif letter_condition=='Q' or letter_condition=='q' or letter_condition=='quit':
+        letter_condition='QUIT'
+    else: #If plalyer gives an invalid input it repeats the function until otherwise
+        print('Invalid Input!')
+        print('Q:to quit game', 'RG to restart')
+        get_letter_condition(i)
 
 def game():
     for i in range(n):
@@ -92,12 +113,7 @@ def game():
             pass
         else:
             print(player[i].name, player[i].cash)
-            if player[i].call_amount == 0:
-                letter_condition = input("Check(C)/Raise(R)/Fold(F): ")
-            else:
-                print('Current Raise: ', Player.raise_max)
-                print('To Call: ', player[i].call_amount)
-                letter_condition = input("Call(C)/Raise(R)/Fold(F): ")
+            get_letter_condition(i)
             if letter_condition == 'C':
                 player[i].cashing(player[i].call_amount)
                 player[i].call_amount = 0
