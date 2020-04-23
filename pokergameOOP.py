@@ -1,12 +1,10 @@
 n = int(input("Number of Players: "))
-player = {}
 
-class Game:
+
+
+class Player:
     num_of_players = 0
-    pot = 0
-    raise_max = 0
-
-    def __init__(self, name, cash, condition, call_amount):
+    def __init__(self, name, cash, condition, call_amount,playerNum):
         """
         Name: The players name
         Cash: Amount of cash the player has.
@@ -18,15 +16,19 @@ class Game:
         self.cash = cash
         self.condition = condition
         self.call_amount = call_amount
-        self.player_number = num_of_players+1
+        self.playerNum = playerNum
         Game.num_of_players += 1
 
     @classmethod
-    def from_input(cls):
+    def from_input(cls,num):
         """Gets input for the game"""
         return cls(
             input('Nama: '),
-            int(input('Cash: ')), 'check', 0, )
+            int(input('Cash: ')), 'check', 0,num)
+
+class Game(Player):
+    pot = 0
+    raise_max = 0
 
     def cashIn(self, value):
         """Event that happens to the player when it puts money on the pot"""
@@ -67,12 +69,58 @@ class Game:
         if _condition == 'fold' or 'check':
             self.call_amount = 0
 
+    def applyRaise(self):
+        """
+        This method take in a raise value of the player to cash into the pot
+        """
+        raise_amount=int(input(" Enter Raise Amount: "))
+        if raise_amount< Game.raise_max :
+            print('Not A Valid Raise')
+            self.applyRaise()
+        self.call_amount = raise_amount - Game.raise_max
+        Game.raise_max = raise_amount
+        self.cashIn(raise_amount)
+        set_condition('check')
+
+    def win(self):
+        self.cash = int(self.cash + Player.pot)
+        Player.pot = 0
+
+    def check_fold():
+        f = 0
+        for folds in player:  # fold checking
+            if player[folds].condition == 'fold':
+                f += 1
+        return True if f == n - 1 else False
+
+    def check_call():  # Check the consecutive call made after a raise
+        c = 0
+        for caller in player:
+            if player[caller].call_amount == 0:
+                c += 1
+        Game.raise_max = 0 if c == n else pass
+
+    def restart_game():
+        Game.raise_max = 0
+        for i in player:
+            player[i].condition = 'active'
+            player[i].call_amount = 0
+        game()
+
+    def quit_game():
+        for f in range(n):
+            print(player[f].name, player[f].cash)
+        x = input("Press Enter to Quit Game: ")
+        if x == '':
+            quit()
 
 
+for i in range(n):
+    player[i]=Player(input('Name: '),int(input('Cash: ')), 'check', 0,n)
 def game():
     for i in range(n):
         print('')
-        if player[i].condition == 'fold':
+        if getattr(Player,'num') == 'fold':
             pass
         else:
             print(player[i].name, player[i].cash)
@@ -81,10 +129,7 @@ def game():
                 player[i].cashIn(player[i].call_amount)
                 player[i].call_amount = 0
             elif player[i].condition=='raise':
-                raise_amount = int(input(" Enter Raise Amount: "))  # The raise
-                player[i].call_amount = raise_amount - Game.raise_max  # How much value is added from the raise
-                Game.raise_max = raise_amount  # The change in raise max
-                player[i].cashIn(raise_amount)
+                player[i].applyRaise()
                 for k in range(n):  # update the raise_max database
                     if k != i:
                         player[k].call_amount = player[k].call_amount + player[i].call_amount
@@ -106,19 +151,19 @@ def game():
                 print('')
                 for p in range(n):
                     print(player[p].name, player[p].cash)
-                restart_game()
+                Game.restart_game()
             elif letter_condition == 'QUIT':
-                quit_game()
+                Game.quit_game()
             print(player[i].name, player[i].cash)
-        check_call()
-        if check_fold():
+        Game.check_call()
+        if Game.check_fold():
             for j in range(n):
                 if player[j].condition != 'fold':
                     player[j].win()
             print('')
             for p in range(n):
                 print(player[p].name, player[p].cash)
-            restart_game()
+            Game.restart_game()
     game()
 
 
