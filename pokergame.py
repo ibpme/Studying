@@ -89,7 +89,7 @@ def get_letter_condition(i):
         letter_condition = input("Check(C)/Raise(R)/Fold(F): ")
     else:
         print('Current Raise: ', Player.raise_max)
-        print('To Call: ', player[x].call_amount)
+        print('To Call: ', player[i].call_amount)
         letter_condition = input("Call(C)/Raise(R)/Fold(F): ")
     if letter_condition=='C' or letter_condition=='c' or letter_condition=='call':
         letter_condition='C'
