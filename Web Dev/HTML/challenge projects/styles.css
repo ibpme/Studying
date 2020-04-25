@@ -1,0 +1,42 @@
+body{
+  background-color:#face69;
+}
+img{
+  align-items: center;
+  height: 150px;
+}
+.main_head{
+  font-family: Helvetica;
+  font-size: 50px;
+}
+.caption{
+  font-family: sans-serif;
+}
+h2{
+  font-family: Calibri;
+}
+.projects li{
+  font-size: 20px;
+  font-family: Arial;
+}
+#contact{
+  font-family: Arial;
+  font-size: 10px;
+
+}
+.left{
+  text-align: center;
+  width: 150px;
+  font-family: Calibri;
+}
+.container {
+  max-width: 940px;
+  margin: 0 auto;
+  height: 500px;
+}
+.container h3{
+  text-transform: uppercase;
+}
+.left h3{
+  font-family: Arial;
+}
