@@ -61,7 +61,6 @@ while runing:
             x=[]
             y=[]
             break
-    print(x1,y1)
     screen.fill(black)
     if x1==x_food and y1==y_food:
         food_available=False
