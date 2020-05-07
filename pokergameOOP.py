@@ -1,3 +1,16 @@
+player = {}
+n=0
+
+def main():##TODO Make execption Trial for Input
+    global n
+    n = int(input("Number of Players: "))
+    global player
+    for t in range(n):
+        playerName=input('Name: ')
+        playerCash=int(input('Cash: '))
+        player[t] = Player(playerName,playerCash, 'check', 0, t)
+    Game.restart_game()
+
 class Player:
 
     def __init__(self, name, cash, condition, call_amount, playerNum):
@@ -129,7 +142,7 @@ class Game(Player):
             pass
 
     @staticmethod
-    def restart_game():  # TODO: FIx memory of pot so that game can reset the pot
+    def restart_game():  # TODO: Set a database storing the cash of each player in every round to be able to reset pot
         """This restart the  game after the pot  is settled"""
         Game.raise_max = 0
         for i in player:
@@ -188,11 +201,5 @@ def game():
             Game.restart_game()
     game()
 
-# TODO: Create main _ name and fixed global n variable issue
-n = int(input("Number of Players: "))
-player = {}
-for t in range(n):
-    playerName=input('Name: ')
-    playerCash=int(input('Cash: '))
-    player[t] = Player(playerName,playerCash, 'check', 0, t)
-Game.restart_game()
+if __name__ == '__main__':
+    main()
