@@ -189,10 +189,10 @@ def game():
     game()
 
 # TODO: Create main _ name and fixed global n variable issue
-n = input("Number of Players: ")
-playerCash=int(input('Cash: '))
-playerName=input('Name: ')
+n = int(input("Number of Players: "))
 player = {}
 for t in range(n):
+    playerName=input('Name: ')
+    playerCash=int(input('Cash: '))
     player[t] = Player(playerName,playerCash, 'check', 0, t)
 Game.restart_game()
