@@ -13,13 +13,17 @@ def bubble_sort():
     Worst = O(n^2)
     Memmory = 1 """
 
-    for i in range(n):
-        b = a[i]
-        c = i - 1
-        while c >= 0 and b < a[c]:
-            a[c + 1] = a[c]
-            c -= 1
-        a[c + 1] = b
+    while True :
+        swap = 0
+        for i in range(n-1):
+            b = a[i]
+            j = i + 1
+            if a[j] < b:
+                a[i] = a[j]
+                a[j] = b
+                swap=1
+        if swap==0:
+            break
 
 
 def selection_sort():
