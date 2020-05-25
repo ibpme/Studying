@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style  type="text/css">
+        canvas{
+            background-color: #a69695;
+            border:3px solid black;
+            margin: 0px;
+            
+        }
+        body{
+            margin: 2px;
+            font-family: sans-serif;
+            font-size: 10px;
+            color: black;
+        }
+        #score {
+            background-color: #4b4d45;
+            border:3px solid black;
+            color: black;
+            margin: 0px;
+            display:inline-flex;
+            align-items: center;
+        }
+        #currentscore{
+            margin-left: 30px;
+            padding: 1px;
+        }
+        #highscore{
+            margin-left: 60px;
+            padding: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">
+        <h1 id="title"></h1>
+        <h2 id="currentscore">Foo</h2>
+        <h2 id="highscore">Foo1234</h2>
+    </div>
+    <div>
+        <canvas id="game"></canvas>
+    </div>
+    <script src="./canvas.js"></script>
+</body>
+</html>
