@@ -52,6 +52,8 @@ class Player:
 
         if initialCondition == 'check':
             letter_condition = input("Check(C)/Raise(R)/Fold(F): ")
+        elif initialCondition == 'fold':
+            return
         else:
             print('Current Raise: ', Game.raise_max)
             print('To Call: ', self.call_amount)
