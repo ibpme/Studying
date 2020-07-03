@@ -11,11 +11,12 @@ canvas.height = square;
 scoreElement.style.width = `${square}px`;
 scoreElement.style.height = `${square / 10}px`;
 
-title.innerHTML = "SnakeGame"
-highScore.innerHTML=`High Score : ${0}`
-
 var points = 0
+var highPoints =0;
 var tail = 2
+
+title.innerHTML = "SnakeGame"
+highScore.innerHTML = `High Score : ${highPoints}`
 
 var dx=scale;
 var dy=0;
@@ -52,34 +53,46 @@ var snakeTail = [
         y:snakeHead.y
     }
 ]
+
     
 function snakeDraw(){
-     ctx.fillStyle = "#d9d5ca";
-     ctx.fillRect(snakeHead.x, snakeHead.y, scale, scale);
-     snakeTail.forEach(tail => {
-        ctx.fillRect(tail.x, tail.y, scale, scale)
-     })
+    if (snakeHead.x >= canvas.width) {
+        snakeHead.x = 0;
+    }
+    if (snakeHead.x < 0) {
+        snakeHead.x = canvas.width + dx;
+    }
+    if (snakeHead.y >= canvas.height) {
+        snakeHead.y = 0;
+    }
+    if (snakeHead.y < 0) {
+        snakeHead.y = canvas.height + dy;
+    }
+
+    snakeTail.unshift({
+        x: snakeHead.x,
+        y: snakeHead.y
+    })
      snakeHead.x += dx;
      snakeHead.y += dy;
-     snakeTail.unshift({
-         x:snakeHead.x,
-         y:snakeHead.y})
-    if (snakeTail.length > tail){
+
+    for (var i = 0; i < snakeTail.length; i++) {
+        if (snakeTail[i].x === snakeHead.x && snakeTail[i].y === snakeHead.y) {
+            gameOver()
+            break;
+        }
+    }
+    
+    while (snakeTail.length > tail) {
         snakeTail.pop()
     }
-    if (snakeHead.x>=canvas.width){
-         snakeHead.x=0;
-    }
-    if (snakeHead.x<0){
-         snakeHead.x=canvas.width+dx;
-    }
-    if (snakeHead.y>=canvas.height){
-        snakeHead.y=0;
-    }
-    if (snakeHead.y<0){
-        snakeHead.y=canvas.height+dy;
-    }
+    ctx.fillStyle = "#d9d5ca";
+    ctx.fillRect(snakeHead.x, snakeHead.y, scale, scale);
+    snakeTail.forEach(tail => {
+        ctx.fillRect(tail.x, tail.y, scale, scale)
+    })
 }
+
 
 let foodAvailable = false
 var food;
@@ -101,12 +114,41 @@ function generateFood(){
     ctx.fillRect(food.x, food.y, scale, scale)
 }
 
+function gameOver(){
+    tail=2;
+    if (points>highPoints){
+        highPoints=points;
+    }
+    highScore.innerHTML = `High Score : ${highPoints}`;
+    points = 0;
+    snakeHead = {
+        x: Math.floor(Math.random() * square / scale) * scale,
+        y: Math.floor(Math.random() * square / scale) * scale
+    };
+    snakeTail = [
+        {   
+            x: snakeHead.x - scale,
+            y: snakeHead.y
+        },
+        {
+            x: snakeHead.x - scale * 2,
+            y: snakeHead.y
+        }
+    ];
+    setInterval(function(){
+        ctx.font = "40px Comic Sans MS";
+        ctx.fillStyle = "red";
+        ctx.textAlign = center;
+        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+    },1000)
+}
+
+
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     snakeDraw();
     generateFood();
     currentScore.innerHTML = `Score : ${points}`;
-
 }
 
 setInterval(animate, 1000 / 15)
