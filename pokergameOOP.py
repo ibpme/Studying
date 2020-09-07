@@ -4,7 +4,7 @@ n=0
 def main():##TODO Make execption Trial for Input
     global n
     n = int(input("Number of Players: "))
-    global player
+    global player 
     for t in range(n):
         playerName=input('Name: ')
         playerCash=int(input('Cash: '))
@@ -127,7 +127,9 @@ class Game(Player):
     def check_call():
         """This method checks the consecutive call to a raise made after a raise to make
         sure that when all raise are a called the maximum raise resets
-        then it also apply a condition based on the call amount and intial condition"""
+        then it also apply a condition based on the call amount and intial condition
+        adjustCall Status method
+        """
         c = 0
         for caller in player:
             if player[caller].call_amount == 0:
